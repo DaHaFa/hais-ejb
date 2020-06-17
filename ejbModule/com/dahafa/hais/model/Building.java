@@ -1,0 +1,68 @@
+package com.dahafa.hais.model;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+
+
+@Entity
+@NamedQuery(name="Building.findAll", query="SELECT b FROM Building b")
+public class Building implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.SEQUENCE,
+		generator="BuildingGenerator")
+	@SequenceGenerator(name="BuildingGenerator",
+		sequenceName="BuildingSequence", allocationSize=1)
+	private long buildingID;
+
+	@OneToMany
+	@JoinColumn(name="BUILDING")
+	private List<Floor> floors;
+
+	private String name;
+
+
+	public long getBuildingID() {
+		return this.buildingID;
+	}
+
+	public void setBuildingID(final long buildingID) {
+		this.buildingID = buildingID;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
+	}
+
+	public List<Floor> getFloors() {
+		return this.floors;
+	}
+
+	public void setFloors(final List<Floor> floors) {
+		this.floors = floors;
+	}
+
+	public Floor addFloor(final Floor floor) {
+		this.getFloors().add(floor);
+		return floor;
+	}
+
+	public Floor removeFloor(final Floor floor) {
+		this.getFloors().remove(floor);
+		return floor;
+	}
+}
