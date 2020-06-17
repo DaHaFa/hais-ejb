@@ -8,8 +8,6 @@ drop sequence FloorSequence;
 
 drop sequence RoomSequence;
 
-drop sequence HospitalEmployeeSequence;
-
 drop sequence AuthorizationRoleSequence;
 
 drop sequence TreatmentTypeSequence;

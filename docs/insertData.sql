@@ -349,13 +349,33 @@ INSERT INTO HealthInsurance(insuranceID, address, name) VALUES
 INSERT INTO HealthInsurance(insuranceID, address, name) VALUES 
 ('DE1234567893', 13, 'TK Stuttgart');
 -- ******************************************************************************************
-CREATE TABLE GeoLocation (
-    longitude FLOAT,
-    latitude FLOAT,
-    altitude FLOAT,
-    room INT NOT NULL,
-    PRIMARY KEY (longitude, latitude, altitude)
-);
+-- Fabian
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(48.177945, 8.895004, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(48.177884, 8.894894, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(48.177766, 8.895040, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(48.177828, 8.895149, 0.000000, 1);
+-- Dardan
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(48.143940, 9.380481, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(48.143834, 9.380512, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(48.143860, 9.380730, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(48.143969, 9.380698, 0.000000, 1);
+-- Hasan
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(47.989273, 9.109747, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(47.989172, 9.109644, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(47.989024, 9.110027, 0.000000, 1);
+INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+(47.989130, 9.110121, 0.000000, 1);
 -- ***************************************************************************************
 INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender) VALUES 
 ('DE1234567890', 6, 'Hasan Kerem', 'Karadeniz', 'B. Sc.', 'MALE');
@@ -376,20 +396,13 @@ INSERT INTO PersonHealthInsurance(person, insurance, insuranceNumber) VALUES
 ('DE1234567893', 'DE1234567893', 'DE1234567892');
   --  CONSTRAINT personHealthInsurance_pk PRIMARY KEY (person, insuranceNumber)
 --******************************************************************************************
-CREATE TABLE HospitalEmployee (
-    personID VARCHAR2(64) PRIMARY KEY,
-    employee INT NOT NULL UNIQUE,
-    salary INT NOT NULL,
-    supervisor INT,
-    typeOfEmployee VARCHAR2(64),
-    startEmployment TIMESTAMP,
-    endEmployment TIMESTAMP,
-    picture BLOB,
-    CONSTRAINT hospitalemployee_typeofemployee CHECK (typeOfEmployee IN ('DOCTOR', 'NURSE') AND typeOfEmployee IS NOT NULL)
-);
+INSERT INTO HospitalEmployee(personID, salary, supervisor, typeOfEmployee, startEmployment, endEmployment, picture) VALUES 
+('DE1234567890', 100000, null, 'DOCTOR', to_date('14-07-2018 00:00:00','dd-mm-yyyy hh24:mi:ss'), null, null);
+INSERT INTO HospitalEmployee(personID, salary, supervisor, typeOfEmployee, startEmployment, endEmployment, picture) VALUES 
+('DE1234567893', 60500, 'DE1234567890', 'NURSE', to_date('01-06-2020 00:00:00','dd-mm-yyyy hh24:mi:ss'), null, null);
 --******************************************************************************************
 INSERT INTO Patient(personID, bloodType) VALUES 
-('DE1234567890', 'A RH POS');
+('DE1234567890', 'B RH NEG');
 INSERT INTO Patient(personID, bloodType) VALUES 
 ('DE1234567891', '0 RH POS');
 INSERT INTO Patient(personID, bloodType) VALUES 
@@ -397,78 +410,75 @@ INSERT INTO Patient(personID, bloodType) VALUES
 INSERT INTO Patient(personID, bloodType) VALUES 
 ('DE1234567893', 'AB RH POS');
 --******************************************************************************************
-CREATE TABLE AuthorizationRole (
-    authorizationRoleID INT PRIMARY KEY,
-    name VARCHAR2(64) UNIQUE --,
-    -- supervisorRole INT 
-);
+INSERT INTO AuthorizationRole(authorizationRoleID, name) VALUES
+(AuthorizationRoleSequence.nextVal, 'DOCTOR');
+INSERT INTO AuthorizationRole(authorizationRoleID, name) VALUES
+(AuthorizationRoleSequence.nextVal, 'NURSE');
+INSERT INTO AuthorizationRole(authorizationRoleID, name) VALUES
+(AuthorizationRoleSequence.nextVal, 'MASSAGE THERAPIST');
 --******************************************************************************************
-CREATE TABLE RoleAssignment (
-    employee INT,
-    authorizationRole INT,
-    CONSTRAINT roleAssignment_primaryKey PRIMARY KEY (employee, authorizationRole)
-);
+INSERT INTO RoleAssignment(employee, authorizationRole) VALUES
+('DE1234567890', 1);
+INSERT INTO RoleAssignment(employee, authorizationRole) VALUES
+('DE1234567893', 2);
 --******************************************************************************************
-CREATE TABLE TreatmentType (
-    treatmentTypeID INT PRIMARY KEY,
-    name VARCHAR2(64) UNIQUE,
-    averageDuration INT NOT NULL,           -- in Minutes? Secondes?
-    averageDurationUom VARCHAR2(8),
-    CONSTRAINT treatmentType_averageDurationUom CHECK (averageDurationUom IN ('SECONDS', 'MINUTES', 'HOURS', 'DAYS', 'MONTHS', 'YEARS') AND averageDurationUom IS NOT NULL)
-);
+INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
+(TreatmentTypeSequence.nextVal, 'Tetanus Impfung', 3, 'MINUTES');
+INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
+(TreatmentTypeSequence.nextVal, 'Impfstoff vorbereiten', 1, 'MINUTES');
+INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
+(TreatmentTypeSequence.nextVal, 'Spritze mit Impfstoff füllen', 30, 'SECONDS');
+INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
+(TreatmentTypeSequence.nextVal, 'Oberarm desinfizieren', 15, 'SECONDS');
+INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
+(TreatmentTypeSequence.nextVal, 'Impfstoff spritzen', 10, 'SECONDS');
+INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
+(TreatmentTypeSequence.nextVal, 'Pflaster anbringen', 30, 'SECONDS');
 --******************************************************************************************
-CREATE TABLE Authorization (
-    treatmentType INT,
-    authorizationRole INT,
-    CONSTRAINT authorization_primaryKey PRIMARY KEY (treatmentType, authorizationRole)
-);
+INSERT INTO Authorization(treatmentType, authorizationRole) VALUES
+(1, 2);
+INSERT INTO Authorization(treatmentType, authorizationRole) VALUES
+(2, 2);
+INSERT INTO Authorization(treatmentType, authorizationRole) VALUES
+(3, 2);
+INSERT INTO Authorization(treatmentType, authorizationRole) VALUES
+(4, 2);
+INSERT INTO Authorization(treatmentType, authorizationRole) VALUES
+(5, 2);
+INSERT INTO Authorization(treatmentType, authorizationRole) VALUES
+(6, 2);
 --******************************************************************************************
-CREATE TABLE TreatmentSchedule (
-    treatmentAction INT,
-    treatmentStep INT,
-    sequenceNumber INT,
-    CONSTRAINT treatmentSchedule_primaryKey PRIMARY KEY (treatmentAction, treatmentStep),
-    CONSTRAINT treatmentSchedule_recursive CHECK (treatmentAction <> treatmentStep)
-);
+INSERT INTO TreatmentSchedule(treatmentAction, treatmentStep, sequenceNumber) VALUES 
+(1, 2, 1);
+INSERT INTO TreatmentSchedule(treatmentAction, treatmentStep, sequenceNumber) VALUES 
+(1, 3, 2);
+INSERT INTO TreatmentSchedule(treatmentAction, treatmentStep, sequenceNumber) VALUES 
+(1, 4, 3);
+INSERT INTO TreatmentSchedule(treatmentAction, treatmentStep, sequenceNumber) VALUES 
+(1, 5, 4);
+INSERT INTO TreatmentSchedule(treatmentAction, treatmentStep, sequenceNumber) VALUES 
+(1, 6, 5);
 --******************************************************************************************
-CREATE TABLE BillOfMaterial (
-    treatmentType INT,
-    material INT,
-    quantity DECIMAL(18,3),
-    CONSTRAINT billOfMaterial_primaryKey PRIMARY KEY (treatmentType, material)
-);
+INSERT INTO BillOfMaterial(treatmentType, material, quantity) VALUES 
+(2, 1, 1);
 --******************************************************************************************
-CREATE TABLE Material (
-    materialID INT PRIMARY KEY,
-    stock DECIMAL(18,3),
-    uom VARCHAR(128)
-);
+INSERT INTO Material(materialID, name, stock, uom) VALUES
+(MaterialSequence.nextVal, 'Tetanus-Impfstoff-Kit', 150.0, 'Stk.');
+INSERT INTO Material(materialID, name, stock, uom) VALUES
+(MaterialSequence.nextVal, 'MRT-Gerät', 5.0, 'Stk.');
 --******************************************************************************************
-CREATE TABLE RoomEquipment (
-    room INT,
-    material INT,
-    CONSTRAINT roomEquipment_primaryKey PRIMARY KEY (room, material)
-);
+INSERT INTO RoomEquipment(room, material) VALUES
+(2, 1);
+INSERT INTO RoomEquipment(room, material) VALUES
+(2, 2);
 --******************************************************************************************
-CREATE TABLE Treatment(
-    treatmentID INT PRIMARY KEY,
-    room INT NOT NULL,
-    hospitalEmployee INT NOT NULL,
-    treatmentType INT NOT NULL,
-    startTimestamp TIMESTAMP,
-    endTimestamp TIMESTAMP,
-    CONSTRAINT treatment_UNIQUE UNIQUE (room, hospitalEmployee, treatmentType, startTimestamp)
-);
+INSERT INTO Stay(stayID, room, hospital, responsibleDocor, startTimestamp, endTimestamp) VALUES
+(StaySequence.nextVal, 1, 1, 'DE1234567890', to_date('04-04-2020 18:41:34','dd-mm-yyyy hh24:mi:ss'), to_date('04-04-2020 21:04:23','dd-mm-yyyy hh24:mi:ss'));
+INSERT INTO Stay(stayID, room, hospital, responsibleDocor, startTimestamp, endTimestamp) VALUES
+(StaySequence.nextVal, 1, 1, 'DE1234567890', to_date('16-06-2020 13:11:14','dd-mm-yyyy hh24:mi:ss'), null);
 --******************************************************************************************
-CREATE TABLE Stay (
-    stayID INT PRIMARY KEY,
-    room INT NOT NULL,
-    hospital INT NOT NULL,
-    responsibleDoctor INT NOT NULL,
-    treatment INT NOT NULL,
-    startTimestamp TIMESTAMP NOT NULL,
-    endTimestamp TIMESTAMP
-);
+INSERT INTO Treatment(treatmentID, stay, room, hospitalEmployee, treatmentType, startTimestamp, endTimestamp) VALUES
+(TreatmentSequence.nextVal, 1, 1, 'DE1234567893', 1, to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'), to_date('17-06-2020 08:07:57','dd-mm-yyyy hh24:mi:ss'));
 --******************************************************************************************
 CREATE TABLE Disease (
     diseaseID INT PRIMARY KEY,
@@ -480,7 +490,7 @@ CREATE TABLE Diagnostics (
     diagnosticsID INT PRIMARY KEY,
     person VARCHAR2(64) NOT NULL,
     disease INT NOT NULL,
-    doctor INT NOT NULL,
+    doctor VARCHAR2(64) NOT NULL,
     diagnosticTimestamp TIMESTAMP NOT NULL
 );
 --******************************************************************************************

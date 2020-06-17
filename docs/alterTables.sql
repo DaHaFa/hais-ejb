@@ -35,7 +35,7 @@ ADD CONSTRAINT fk_personHealthInsurance_insurance FOREIGN KEY(insurance) REFEREN
 ALTER TABLE HospitalEmployee
 ADD CONSTRAINT fk_hospitalEmployee_personID FOREIGN KEY(personID) REFERENCES Person(personID);
 ALTER TABLE HospitalEmployee
-ADD CONSTRAINT fk_hospitalEmployee_employee FOREIGN KEY(supervisor) REFERENCES HospitalEmployee(employee);
+ADD CONSTRAINT fk_hospitalEmployee_employee FOREIGN KEY(supervisor) REFERENCES HospitalEmployee(personID);
 
 ALTER TABLE Patient
 ADD CONSTRAINT fk_patient_personID FOREIGN KEY(personID) REFERENCES Person(personID);
@@ -43,7 +43,7 @@ ADD CONSTRAINT fk_patient_personID FOREIGN KEY(personID) REFERENCES Person(perso
 -- ALTER TABLE AuthorizationRole
 
 ALTER TABLE RoleAssignment 
-ADD CONSTRAINT fk_roleAssignment_employee FOREIGN KEY(employee) REFERENCES HospitalEmployee(employee);
+ADD CONSTRAINT fk_roleAssignment_employee FOREIGN KEY(employee) REFERENCES HospitalEmployee(personID);
 ALTER TABLE RoleAssignment 
 ADD CONSTRAINT fk_roleAssignment_authorizationRole FOREIGN KEY(authorizationRole) REFERENCES AuthorizationRole(authorizationRoleID);
 
@@ -74,18 +74,19 @@ ADD CONSTRAINT fk_roomEquipment_material FOREIGN KEY(material) REFERENCES Materi
 ALTER TABLE Treatment 
 ADD CONSTRAINT fk_treatment_room FOREIGN KEY(room) REFERENCES Room(roomID);
 ALTER TABLE Treatment 
-ADD CONSTRAINT fk_treatment_hospitalEmployee FOREIGN KEY(hospitalEmployee) REFERENCES HospitalEmployee(employee);
+ADD CONSTRAINT fk_treatment_hospitalEmployee FOREIGN KEY(hospitalEmployee) REFERENCES HospitalEmployee(personID);
 ALTER TABLE Treatment 
 ADD CONSTRAINT fk_treatment_treatmentType FOREIGN KEY(treatmentType) REFERENCES TreatmentType(treatmentTypeID);
+ALTER TABLE Treatment 
+ADD CONSTRAINT fk_treatment_stay FOREIGN KEY(stay) REFERENCES Stay(stayID);
 
 ALTER TABLE Stay 
 ADD CONSTRAINT fk_stay_room FOREIGN KEY(room) REFERENCES Room(roomID);
 ALTER TABLE Stay 
 ADD CONSTRAINT fk_stay_hospital FOREIGN KEY(hospital) REFERENCES Hospital(hospitalID);
 ALTER TABLE Stay 
-ADD CONSTRAINT fk_stay_responsibleDoctor FOREIGN KEY(responsibleDoctor) REFERENCES HospitalEmployee(employee);
-ALTER TABLE Stay 
-ADD CONSTRAINT fk_stay_treatment FOREIGN KEY(treatment) REFERENCES Treatment(treatmentID);
+ADD CONSTRAINT fk_stay_responsibleDoctor FOREIGN KEY(responsibleDoctor) REFERENCES HospitalEmployee(personID);
+
 
 -- ALTER TABLE Disease 
 
@@ -94,7 +95,7 @@ ADD CONSTRAINT fk_diagnostics_person FOREIGN KEY(person) REFERENCES Person(perso
 ALTER TABLE Diagnostics 
 ADD CONSTRAINT fk_diagnostics_disease FOREIGN KEY(disease) REFERENCES Disease(diseaseID);
 ALTER TABLE Diagnostics 
-ADD CONSTRAINT fk_diagnostics_doctor FOREIGN KEY(doctor) REFERENCES hospitalEmployee(employee);
+ADD CONSTRAINT fk_diagnostics_doctor FOREIGN KEY(doctor) REFERENCES HospitalEmployee(personID);
 
 
 ALTER TABLE MedicalRecord 

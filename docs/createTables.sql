@@ -61,7 +61,6 @@ CREATE TABLE Person (
     CONSTRAINT person_gender CHECK (gender IN ('MALE', 'FEMALE', 'DIVERSE') AND gender IS NOT NULL)
 );
 
--- u.U bei JPA mit Many 
 CREATE TABLE PersonHealthInsurance (
     person VARCHAR2(64),
     insurance VARCHAR2(64),
@@ -71,12 +70,11 @@ CREATE TABLE PersonHealthInsurance (
 
 CREATE TABLE HospitalEmployee (
     personID VARCHAR2(64) PRIMARY KEY,
-    employee INT NOT NULL UNIQUE,
     salary INT NOT NULL,
-    supervisor INT,
+    supervisor VARCHAR2(64),
     typeOfEmployee VARCHAR2(64),
-    startEmployment TIMESTAMP,
-    endEmployment TIMESTAMP,
+    startEmployment DATE,
+    endEmployment DATE,
     picture BLOB,
     CONSTRAINT hospitalemployee_typeofemployee CHECK (typeOfEmployee IN ('DOCTOR', 'NURSE') AND typeOfEmployee IS NOT NULL)
 );
@@ -94,7 +92,7 @@ CREATE TABLE AuthorizationRole (
 );
 
 CREATE TABLE RoleAssignment (
-    employee INT,
+    employee VARCHAR2(64),
     authorizationRole INT,
     CONSTRAINT roleAssignment_primaryKey PRIMARY KEY (employee, authorizationRole)
 );
@@ -142,11 +140,12 @@ CREATE TABLE RoomEquipment (
 
 CREATE TABLE Treatment(
     treatmentID INT PRIMARY KEY,
+    stay INT NOT NULL,
     room INT NOT NULL,
-    hospitalEmployee INT NOT NULL,
+    hospitalEmployee VARCHAR2(64) NOT NULL,
     treatmentType INT NOT NULL,
-    startTimestamp TIMESTAMP,
-    endTimestamp TIMESTAMP,
+    startTimestamp DATE,
+    endTimestamp DATE,
     CONSTRAINT treatment_UNIQUE UNIQUE (room, hospitalEmployee, treatmentType, startTimestamp)
 );
 
@@ -155,10 +154,9 @@ CREATE TABLE Stay (
     stayID INT PRIMARY KEY,
     room INT NOT NULL,
     hospital INT NOT NULL,
-    responsibleDoctor INT NOT NULL,
-    treatment INT NOT NULL,
-    startTimestamp TIMESTAMP NOT NULL,
-    endTimestamp TIMESTAMP
+    responsibleDoctor VARCHAR(64) NOT NULL,
+    startTimestamp DATE NOT NULL,
+    endTimestamp DATE
 );
 
 
@@ -173,8 +171,8 @@ CREATE TABLE Diagnostics (
     diagnosticsID INT PRIMARY KEY,
     person VARCHAR2(64) NOT NULL,
     disease INT NOT NULL,
-    doctor INT NOT NULL,
-    diagnosticTimestamp TIMESTAMP NOT NULL
+    doctor VARCHAR2(64) NOT NULL,
+    diagnosticTimestamp DATE NOT NULL
 );
 
 

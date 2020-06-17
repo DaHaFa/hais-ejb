@@ -13,9 +13,6 @@ increment by 1 start with 1 nomaxvalue nocycle cache 10;
 create sequence RoomSequence
 increment by 1 start with 1 nomaxvalue nocycle cache 10;
 
-create sequence HospitalEmployeeSequence
-increment by 1 start with 1 nomaxvalue nocycle cache 10;
-
 create sequence AuthorizationRoleSequence
 increment by 1 start with 1 nomaxvalue nocycle cache 10;
 
