@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
@@ -16,11 +15,8 @@ import javax.persistence.NamedQuery;
 
 @Entity
 @NamedQuery(name="HospitalEmployee.findAll", query="SELECT h FROM HospitalEmployee h")
-public class HospitalEmployee implements Serializable {
+public class HospitalEmployee extends Person implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	@Id
-	private String personID;
 
 	@Lob
 	private byte[] picture;
@@ -40,14 +36,6 @@ public class HospitalEmployee implements Serializable {
 	private Timestamp endEmployment;
 	private String typeOfEmployee;
 
-
-	public String getPersonID() {
-		return this.personID;
-	}
-
-	public void setPersonID(final String personID) {
-		this.personID = personID;
-	}
 
 	public List<AuthorizationRole> getAuthorizationRoles() {
 		return this.authorizationRoles;

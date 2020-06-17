@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
@@ -12,6 +14,7 @@ import javax.persistence.OneToMany;
 
 
 @Entity
+@Inheritance(strategy=InheritanceType.JOINED)
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
