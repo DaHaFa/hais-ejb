@@ -14,10 +14,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="TreatmentType.findAll", query="SELECT t FROM TreatmentType t")
-public class TreatmentType implements Serializable {
+public class TreatmentType implements Serializable, Identifiable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -45,11 +47,12 @@ public class TreatmentType implements Serializable {
 	private String averageDurationUOM;
 
 
-	public long getTreatmentTypeID() {
+	@Override
+	public Long getID() {
 		return this.treatmentTypeID;
 	}
 
-	public void setTreatmentTypeID(final long treatmentTypeID) {
+	public void setID(final long treatmentTypeID) {
 		this.treatmentTypeID = treatmentTypeID;
 	}
 

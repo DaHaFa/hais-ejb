@@ -8,10 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="HealthInsurance.findAll", query="SELECT h FROM HealthInsurance h")
-public class HealthInsurance implements Serializable {
+public class HealthInsurance implements Serializable, Identifiable<String> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -24,11 +26,12 @@ public class HealthInsurance implements Serializable {
 	private String name;
 
 
-	public String getInsuranceID() {
+	@Override
+	public String getID() {
 		return this.insuranceID;
 	}
 
-	public void setInsuranceID(final String insurance) {
+	public void setID(final String insurance) {
 		this.insuranceID = insurance;
 	}
 

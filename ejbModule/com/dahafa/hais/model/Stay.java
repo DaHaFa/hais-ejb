@@ -16,10 +16,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="Stay.findAll", query="SELECT s FROM Stay s")
-public class Stay implements Serializable {
+public class Stay implements Serializable, Identifiable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -54,11 +56,12 @@ public class Stay implements Serializable {
 	private Timestamp endTimestamp;
 
 
-	public long getStayID() {
+	@Override
+	public Long getID() {
 		return this.stayID;
 	}
 
-	public void setStayID(final long stayID) {
+	public void setID(final long stayID) {
 		this.stayID = stayID;
 	}
 

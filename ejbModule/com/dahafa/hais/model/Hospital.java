@@ -13,10 +13,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="Hospital.findAll", query="SELECT h FROM Hospital h")
-public class Hospital implements Serializable {
+public class Hospital implements Serializable, Identifiable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -37,11 +39,12 @@ public class Hospital implements Serializable {
 	private List<Building> buildings;
 
 
-	public long getHospitalID() {
+	@Override
+	public Long getID() {
 		return this.hospitalID;
 	}
 
-	public void setHospitalID(final long hospitalID) {
+	public void setID(final long hospitalID) {
 		this.hospitalID = hospitalID;
 	}
 

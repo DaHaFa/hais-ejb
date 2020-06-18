@@ -7,10 +7,12 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="GeoLocation.findAll", query="SELECT g FROM GeoLocation g")
-public class GeoLocation implements Serializable {
+public class GeoLocation implements Serializable, Identifiable<GeoLocationID> {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -26,11 +28,12 @@ public class GeoLocation implements Serializable {
 	private double altitude;
 
 
-	public GeoLocationID getGeoLocationID() {
+	@Override
+	public GeoLocationID getID() {
 		return this.geoLocationID;
 	}
 
-	public void setGeoLocationID(final GeoLocationID geoLocationID) {
+	public void setID(final GeoLocationID geoLocationID) {
 		this.geoLocationID = geoLocationID;
 	}
 

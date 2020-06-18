@@ -12,10 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="Treatment.findAll", query="SELECT t FROM Treatment t")
-public class Treatment implements Serializable {
+public class Treatment implements Serializable, Identifiable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -41,11 +43,12 @@ public class Treatment implements Serializable {
 	private Timestamp endTimestamp;
 
 
-	public long getTreatmentID() {
+	@Override
+	public Long getID() {
 		return this.treatmentID;
 	}
 
-	public void setTreatmentID(final long treatmentID) {
+	public void setID(final long treatmentID) {
 		this.treatmentID = treatmentID;
 	}
 

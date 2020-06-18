@@ -8,10 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="BillOfMaterial.findAll", query="SELECT b FROM BillOfMaterial b")
-public class BillOfMaterial implements Serializable {
+public class BillOfMaterial implements Serializable, Identifiable<BillOfMaterialID> {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -24,11 +26,12 @@ public class BillOfMaterial implements Serializable {
 	private double quantity;
 
 
-	public BillOfMaterialID getBillOfMaterialID() {
+	@Override
+	public BillOfMaterialID getID() {
 		return this.billOfMaterialID;
 	}
 
-	public void setBillOfMaterialID(final BillOfMaterialID billOfMaterialID) {
+	public void setID(final BillOfMaterialID billOfMaterialID) {
 		this.billOfMaterialID = billOfMaterialID;
 	}
 

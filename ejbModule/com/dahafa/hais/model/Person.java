@@ -12,11 +12,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @Inheritance(strategy=InheritanceType.JOINED)
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
-public class Person implements Serializable {
+public class Person implements Serializable, Identifiable<String> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -36,11 +38,12 @@ public class Person implements Serializable {
 	private String gender;
 
 
-	public String getPersonID() {
+	@Override
+	public String getID() {
 		return this.personID;
 	}
 
-	public void setPersonID(final String personID) {
+	public void setID(final String personID) {
 		this.personID = personID;
 	}
 

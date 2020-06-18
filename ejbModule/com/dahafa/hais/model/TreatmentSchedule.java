@@ -8,10 +8,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="TreatmentSchedule.findAll", query="SELECT t FROM TreatmentSchedule t")
-public class TreatmentSchedule implements Serializable {
+public class TreatmentSchedule implements Serializable, Identifiable<TreatmentScheduleID> {
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
@@ -24,11 +26,12 @@ public class TreatmentSchedule implements Serializable {
 	private long sequenceNumber;
 
 
-	public TreatmentScheduleID getTreatmentScheduleID() {
+	@Override
+	public TreatmentScheduleID getID() {
 		return this.treatmentScheduleID;
 	}
 
-	public void setTreatmentScheduleID(final TreatmentScheduleID treatmentScheduleID) {
+	public void setID(final TreatmentScheduleID treatmentScheduleID) {
 		this.treatmentScheduleID = treatmentScheduleID;
 	}
 
