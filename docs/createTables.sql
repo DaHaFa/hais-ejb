@@ -128,6 +128,7 @@ CREATE TABLE BillOfMaterial (
 
 CREATE TABLE Material (
     materialID INT PRIMARY KEY,
+    name VARCHAR(128),
     stock DECIMAL(18,3),
     uom VARCHAR(128)
 );

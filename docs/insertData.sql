@@ -345,7 +345,7 @@ INSERT INTO HealthInsurance(insuranceID, address, name) VALUES
 INSERT INTO HealthInsurance(insuranceID, address, name) VALUES 
 ('DE1234567891', 11, 'BKK SBH - Trossingen');
 INSERT INTO HealthInsurance(insuranceID, address, name) VALUES 
-('DE1234567892', 12, 'BKK ZF & Partner - Friedrichshafen');
+('DE1234567892', 12, 'BKK ZF und Partner - Friedrichshafen');
 INSERT INTO HealthInsurance(insuranceID, address, name) VALUES 
 ('DE1234567893', 13, 'TK Stuttgart');
 -- ******************************************************************************************
@@ -459,22 +459,22 @@ INSERT INTO TreatmentSchedule(treatmentAction, treatmentStep, sequenceNumber) VA
 INSERT INTO TreatmentSchedule(treatmentAction, treatmentStep, sequenceNumber) VALUES 
 (1, 6, 5);
 --******************************************************************************************
-INSERT INTO BillOfMaterial(treatmentType, material, quantity) VALUES 
-(2, 1, 1);
---******************************************************************************************
 INSERT INTO Material(materialID, name, stock, uom) VALUES
 (MaterialSequence.nextVal, 'Tetanus-Impfstoff-Kit', 150.0, 'Stk.');
 INSERT INTO Material(materialID, name, stock, uom) VALUES
 (MaterialSequence.nextVal, 'MRT-Gerät', 5.0, 'Stk.');
+--******************************************************************************************
+INSERT INTO BillOfMaterial(treatmentType, material, quantity) VALUES 
+(2, 1, 1);
 --******************************************************************************************
 INSERT INTO RoomEquipment(room, material) VALUES
 (2, 1);
 INSERT INTO RoomEquipment(room, material) VALUES
 (2, 2);
 --******************************************************************************************
-INSERT INTO Stay(stayID, room, hospital, responsibleDocor, startTimestamp, endTimestamp) VALUES
+INSERT INTO Stay(stayID, room, hospital, responsibleDoctor, startTimestamp, endTimestamp) VALUES
 (StaySequence.nextVal, 1, 1, 'DE1234567890', to_date('04-04-2020 18:41:34','dd-mm-yyyy hh24:mi:ss'), to_date('04-04-2020 21:04:23','dd-mm-yyyy hh24:mi:ss'));
-INSERT INTO Stay(stayID, room, hospital, responsibleDocor, startTimestamp, endTimestamp) VALUES
+INSERT INTO Stay(stayID, room, hospital, responsibleDoctor, startTimestamp, endTimestamp) VALUES
 (StaySequence.nextVal, 1, 1, 'DE1234567890', to_date('16-06-2020 13:11:14','dd-mm-yyyy hh24:mi:ss'), null);
 --******************************************************************************************
 INSERT INTO Treatment(treatmentID, stay, room, hospitalEmployee, treatmentType, startTimestamp, endTimestamp) VALUES
