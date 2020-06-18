@@ -481,7 +481,7 @@ INSERT INTO Treatment(treatmentID, stay, room, hospitalEmployee, treatmentType, 
 (TreatmentSequence.nextVal, 1, 1, 'DE1234567893', 1, to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'), to_date('17-06-2020 08:07:57','dd-mm-yyyy hh24:mi:ss'));
 --******************************************************************************************
 INSERT INTO Disease(diseaseID, name, description) VALUES
-(DiseaseSequence.nextVal, 'Radiusfraktur', Bruch der Speiche');
+(DiseaseSequence.nextVal, 'Radiusfraktur', 'Bruch der Speiche');
 --******************************************************************************************
 INSERT INTO Diagnostics(diagnosticsID, person, disease, doctor, diagnosticTimestamp) VALUES
 (DiagnosticsSequence.nextVal, 'DE1234567891', 1, 'DE1234567893',to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'));
