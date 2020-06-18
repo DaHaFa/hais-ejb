@@ -22,6 +22,7 @@ public class Material implements Serializable {
 		sequenceName="MaterialSequence", allocationSize=1)
 	private long materialID;
 
+	private String name;
 	private double stock;
 	private String uom;
 
@@ -32,6 +33,14 @@ public class Material implements Serializable {
 
 	public void setMaterialID(final long materialID) {
 		this.materialID = materialID;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(final String name) {
+		this.name = name;
 	}
 
 	public double getStock() {

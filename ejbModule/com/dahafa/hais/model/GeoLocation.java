@@ -2,6 +2,7 @@ package com.dahafa.hais.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
@@ -15,8 +16,13 @@ public class GeoLocation implements Serializable {
 	@EmbeddedId
 	private GeoLocationID geoLocationID;
 
+	@Column(insertable=false, updatable=false)
 	private double longitude;
+
+	@Column(insertable=false, updatable=false)
 	private double latitude;
+
+	@Column(insertable=false, updatable=false)
 	private double altitude;
 
 

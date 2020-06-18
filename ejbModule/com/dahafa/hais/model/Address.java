@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="Address.findAll", query="SELECT a FROM Address a")
-public class Address implements Serializable {
+public class Address implements Serializable, Identifiable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -28,12 +30,13 @@ public class Address implements Serializable {
 	private String streetnumber;
 
 
-	public long getAddressID() {
+	@Override
+	public Long getID() {
 		return this.addressID;
 	}
 
-	public void setAddressID(final long addressid) {
-		this.addressID = addressid;
+	public void setID(final long addressID) {
+		this.addressID = addressID;
 	}
 
 	public String getCity() {

@@ -30,7 +30,7 @@ public class HospitalEmployee extends Person implements Serializable {
 			inverseJoinColumns={@JoinColumn(name="AUTHORIZATIONROLE")})
 	private List<AuthorizationRole> authorizationRoles;
 
-	private long employeeID;
+
 	private double salary;
 	private Timestamp startEmployment;
 	private Timestamp endEmployment;
@@ -53,14 +53,6 @@ public class HospitalEmployee extends Person implements Serializable {
 	public AuthorizationRole removeAuthorizationRole(final AuthorizationRole authorizationRole) {
 		this.getAuthorizationRoles().remove(authorizationRole);
 		return authorizationRole;
-	}
-
-	public long getEmployeeID() {
-		return this.employeeID;
-	}
-
-	public void setEmployeeID(final long employeeID) {
-		this.employeeID = employeeID;
 	}
 
 	public Timestamp getEndEmployment() {

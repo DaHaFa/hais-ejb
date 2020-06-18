@@ -13,7 +13,8 @@ public class PersonHealthInsuranceID implements Serializable {
 	@Column(insertable=false, updatable=false)
 	private String person;
 
-	private String insuranceNumber;
+	@Column(insertable=false, updatable=false)
+	private String insurance;
 
 
 	public String getPerson() {
@@ -24,12 +25,12 @@ public class PersonHealthInsuranceID implements Serializable {
 		this.person = person;
 	}
 
-	public String getInsuranceNumber() {
-		return this.insuranceNumber;
+	public String getInsurance() {
+		return this.insurance;
 	}
 
-	public void setInsuranceNumber(final String insuranceNumber) {
-		this.insuranceNumber = insuranceNumber;
+	public void setInsurance(final String insurance) {
+		this.insurance = insurance;
 	}
 
 	@Override
@@ -41,7 +42,7 @@ public class PersonHealthInsuranceID implements Serializable {
 		final PersonHealthInsuranceID castOther = (PersonHealthInsuranceID)other;
 		return
 			this.person.equals(castOther.person)
-			&& this.insuranceNumber.equals(castOther.insuranceNumber);
+			&& this.insurance.equals(castOther.insurance);
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class PersonHealthInsuranceID implements Serializable {
 		final int prime = 31;
 		int hash = 17;
 		hash = hash * prime + this.person.hashCode();
-		hash = hash * prime + this.insuranceNumber.hashCode();
+		hash = hash * prime + this.insurance.hashCode();
 
 		return hash;
 	}

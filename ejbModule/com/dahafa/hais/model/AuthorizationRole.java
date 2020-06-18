@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 
+import com.dahafa.hais.Identifiable;
+
 
 @Entity
 @NamedQuery(name="AuthorizationRole.findAll", query="SELECT a FROM AuthorizationRole a")
-public class AuthorizationRole implements Serializable {
+public class AuthorizationRole implements Serializable, Identifiable<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,11 +27,12 @@ public class AuthorizationRole implements Serializable {
 	private String name;
 
 
-	public long getAuthorizationRoleID() {
+	@Override
+	public Long getID() {
 		return this.authorizationRoleID;
 	}
 
-	public void setAuthorizationRoleID(final long authorizationRoleID) {
+	public void setID(final long authorizationRoleID) {
 		this.authorizationRoleID = authorizationRoleID;
 	}
 
