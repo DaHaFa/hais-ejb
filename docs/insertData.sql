@@ -484,8 +484,9 @@ INSERT INTO Disease(diseaseID, name, description) VALUES
 (DiseaseSequence.nextVal, 'Radiusfraktur', 'Bruch der Speiche');
 --******************************************************************************************
 INSERT INTO Diagnostics(diagnosticsID, person, disease, doctor, diagnosticTimestamp) VALUES
-(DiagnosticsSequence.nextVal, 'DE1234567891', 1, 'DE1234567893',to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'));
-                                                                                                                    
+(DiagnosticsSequence.nextVal, 'DE1234567891', 1, 'DE1234567893',to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'));                                                                                                           
 --******************************************************************************************
 INSERT INTO MedicalRecord(stay, diagnostics) VALUES
 (1, 1);
+--******************************************************************************************
+COMMIT;
