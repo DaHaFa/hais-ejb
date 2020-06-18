@@ -2,9 +2,9 @@
 --Addresses for
     -- Hospitals
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
-(AddressSequence.nextVal, '72336', 'Balingen', 'Tübinger Str.', '30');
+(AddressSequence.nextVal, '72336', 'Balingen', 'TÃ¼binger Str.', '30');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
-(AddressSequence.nextVal, '72458', 'Albstadt', 'Friedrichstraße', '39');
+(AddressSequence.nextVal, '72458', 'Albstadt', 'FriedrichstraÃŸe', '39');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
 (AddressSequence.nextVal, '72488', 'Sigmaringen', 'Hohenzollernstr.', '40');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
@@ -14,19 +14,19 @@ INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUE
 --Addresses for
     -- Persons
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
-(AddressSequence.nextVal, '88605', 'Meßkirch', 'Hauptstr.', '21');
+(AddressSequence.nextVal, '88605', 'MeÃŸkirch', 'Hauptstr.', '21');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
-(AddressSequence.nextVal, '72469', 'Meßstetten', 'Am Mühlkanal', '2');
+(AddressSequence.nextVal, '72469', 'MeÃŸstetten', 'Am MÃ¼hlkanal', '2');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
 (AddressSequence.nextVal, '88515', 'Langenenslingen', 'Bei der Schule', '12');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
-(AddressSequence.nextVal, '88605', 'Meßkirch', 'Lindenweg', '81');
+(AddressSequence.nextVal, '88605', 'MeÃŸkirch', 'Lindenweg', '81');
 --Addresses for
     -- Insurance
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
 (AddressSequence.nextVal, '72488', 'Sigmaringen', 'In der Au', '5');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
-(AddressSequence.nextVal, '78647', 'Trossingen', 'Löhrstr.', '45');
+(AddressSequence.nextVal, '78647', 'Trossingen', 'LÃ¶hrstr.', '45');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
 (AddressSequence.nextVal, '88046', 'Friedrichshafen', 'Otto-Lilienthal-Str.', '10');
 INSERT INTO Address(addressID, postalcode, city, streetName, streetNumber) VALUES 
@@ -341,7 +341,7 @@ INSERT INTO Room(roomID, floor, name, roomType) VALUES
 (RoomSequence.nextVal, 44, 'Treatment 1', 'TREATMENT');
 -- ******************************************************************************************
 INSERT INTO HealthInsurance(insuranceID, address, name) VALUES 
-('DE1234567890', 10, 'AOK Baden-Württemberg - Sigmaringen');
+('DE1234567890', 10, 'AOK Baden-WÃ¼rttemberg - Sigmaringen');
 INSERT INTO HealthInsurance(insuranceID, address, name) VALUES 
 ('DE1234567891', 11, 'BKK SBH - Trossingen');
 INSERT INTO HealthInsurance(insuranceID, address, name) VALUES 
@@ -384,7 +384,7 @@ INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender) 
 INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender) VALUES 
 ('DE1234567892', 8, 'Dardan', 'Rrafshi', '', 'MALE');
 INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender) VALUES 
-('DE1234567893', 9, 'Angelina', 'Wöll', 'fast B. Sc.', 'FEMALE');
+('DE1234567893', 9, 'Angelina', 'WÃ¶ll', 'fast B. Sc.', 'FEMALE');
 --******************************************************************************************
 INSERT INTO PersonHealthInsurance(person, insurance, insuranceNumber) VALUES 
 ('DE1234567890', 'DE1234567890', 'DE1234567890');
@@ -427,7 +427,7 @@ INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDuratio
 INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
 (TreatmentTypeSequence.nextVal, 'Impfstoff vorbereiten', 1, 'MINUTES');
 INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
-(TreatmentTypeSequence.nextVal, 'Spritze mit Impfstoff füllen', 30, 'SECONDS');
+(TreatmentTypeSequence.nextVal, 'Spritze mit Impfstoff fÃ¼llen', 30, 'SECONDS');
 INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
 (TreatmentTypeSequence.nextVal, 'Oberarm desinfizieren', 15, 'SECONDS');
 INSERT INTO TreatmentType(treatmentTypeID, name, averageDuration, averageDurationUom) VALUES
@@ -465,7 +465,7 @@ INSERT INTO BillOfMaterial(treatmentType, material, quantity) VALUES
 INSERT INTO Material(materialID, name, stock, uom) VALUES
 (MaterialSequence.nextVal, 'Tetanus-Impfstoff-Kit', 150.0, 'Stk.');
 INSERT INTO Material(materialID, name, stock, uom) VALUES
-(MaterialSequence.nextVal, 'MRT-Gerät', 5.0, 'Stk.');
+(MaterialSequence.nextVal, 'MRT-GerÃ¤t', 5.0, 'Stk.');
 --******************************************************************************************
 INSERT INTO RoomEquipment(room, material) VALUES
 (2, 1);
@@ -480,22 +480,12 @@ INSERT INTO Stay(stayID, room, hospital, responsibleDocor, startTimestamp, endTi
 INSERT INTO Treatment(treatmentID, stay, room, hospitalEmployee, treatmentType, startTimestamp, endTimestamp) VALUES
 (TreatmentSequence.nextVal, 1, 1, 'DE1234567893', 1, to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'), to_date('17-06-2020 08:07:57','dd-mm-yyyy hh24:mi:ss'));
 --******************************************************************************************
-CREATE TABLE Disease (
-    diseaseID INT PRIMARY KEY,
-    name VARCHAR2(64) UNIQUE NOT NULL,
-    description VARCHAR2(256) UNIQUE
-);
+INSERT INTO Disease(diseaseID, name, description) VALUES
+(DiseaseSequence.nextVal, 'Radiusfraktur', Bruch der Speiche');
 --******************************************************************************************
-CREATE TABLE Diagnostics (
-    diagnosticsID INT PRIMARY KEY,
-    person VARCHAR2(64) NOT NULL,
-    disease INT NOT NULL,
-    doctor VARCHAR2(64) NOT NULL,
-    diagnosticTimestamp TIMESTAMP NOT NULL
-);
+INSERT INTO Diagnostics(diagnosticsID, person, disease, doctor, diagnosticTimestamp) VALUES
+(DiagnosticsSequence.nextVal, 'DE1234567891', 1, 'DE1234567893',to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'));
+                                                                                                                    
 --******************************************************************************************
-CREATE TABLE MedicalRecord (
-    stay INT, 
-    diagnostics INT,
-    CONSTRAINT medicalRecord_primaryKey PRIMARY KEY (stay, diagnostics)
-);
+INSERT INTO MedicalRecord(stay, diagnostics) VALUES
+(1, 1);
