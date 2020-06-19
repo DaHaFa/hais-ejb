@@ -5,11 +5,11 @@ import javax.ejb.TransactionManagement;
 import javax.ejb.TransactionManagementType;
 
 import com.dahafa.hais.CrudManager;
-import com.dahafa.hais.model.Address;
+import com.dahafa.hais.model.Treatment;
 
 
 @Stateful
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class AddressManager extends CrudManager<Long, Address> implements AddressService {
+public class TreatmentManager extends CrudManager<Long, Treatment> implements TreatmentService {
 
 }
