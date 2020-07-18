@@ -37,8 +37,6 @@ ADD CONSTRAINT fk_hospitalEmployee_personID FOREIGN KEY(personID) REFERENCES Per
 ALTER TABLE HospitalEmployee
 ADD CONSTRAINT fk_hospitalEmployee_employee FOREIGN KEY(supervisor) REFERENCES HospitalEmployee(personID);
 
-ALTER TABLE Patient
-ADD CONSTRAINT fk_patient_personID FOREIGN KEY(personID) REFERENCES Person(personID);
 
 -- ALTER TABLE AuthorizationRole
 

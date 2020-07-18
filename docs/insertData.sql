@@ -350,41 +350,41 @@ INSERT INTO HealthInsurance(insuranceID, address, name) VALUES
 ('DE1234567893', 13, 'TK Stuttgart');
 -- ******************************************************************************************
 -- Fabian
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
 (48.177945, 8.895004, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
 (48.177884, 8.894894, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
 (48.177766, 8.895040, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
 (48.177828, 8.895149, 0.000000, 1);
--- Dardan
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
-(48.143940, 9.380481, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
-(48.143834, 9.380512, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
-(48.143860, 9.380730, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
-(48.143969, 9.380698, 0.000000, 1);
+-- Dardan (LO, RO, RU, LU)
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
+(48.144212, 9.379838, 0.000000, 2);
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
+(48.144366, 9.380986, 0.000000, 2);
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
+(48.143553, 9.381206, 0.000000, 2);
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
+(48.143375, 9.380214, 0.000000, 2);
 -- Hasan
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
-(47.989273, 9.109747, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
-(47.989172, 9.109644, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
-(47.989024, 9.110027, 0.000000, 1);
-INSERT INTO GeoLocation(longitude, latitude, altitude, room) VALUES
-(47.989130, 9.110121, 0.000000, 1);
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
+(47.989273, 9.109747, 0.000000, 3);
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
+(47.989172, 9.109644, 0.000000, 3);
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
+(47.989024, 9.110027, 0.000000, 3);
+INSERT INTO GeoLocation(latitude, longitude, altitude, room) VALUES
+(47.989130, 9.110121, 0.000000, 3);
 -- ***************************************************************************************
-INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender) VALUES 
-('DE1234567890', 6, 'Hasan Kerem', 'Karadeniz', 'B. Sc.', 'MALE');
-INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender) VALUES 
-('DE1234567891', 7, 'Fabian', 'Altenberg', 'fast B. Sc.', 'MALE');
-INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender) VALUES 
-('DE1234567892', 8, 'Dardan', 'Rrafshi', '', 'MALE');
-INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender) VALUES 
-('DE1234567893', 9, 'Angelina', 'Wöll', 'fast B. Sc.', 'FEMALE');
+INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender, bloodType) VALUES 
+('DE1234567890', 6, 'Hasan Kerem', 'Karadeniz', 'B. Sc.', 'MALE', 'B RH NEG');
+INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender, bloodType) VALUES 
+('DE1234567891', 7, 'Fabian', 'Altenberg', 'fast B. Sc.', 'MALE', '0 RH POS');
+INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender, bloodType) VALUES 
+('DE1234567892', 8, 'Dardan', 'Rrafshi', '', 'MALE', 'B RH POS');
+INSERT INTO Person(personID, address, firstName, lastName, personTitle, gender, bloodType) VALUES 
+('DE1234567893', 9, 'Angelina', 'Wöll', 'fast B. Sc.', 'FEMALE', 'AB RH POS');
 --******************************************************************************************
 INSERT INTO PersonHealthInsurance(person, insurance, insuranceNumber) VALUES 
 ('DE1234567890', 'DE1234567890', 'DE1234567890');
@@ -400,15 +400,6 @@ INSERT INTO HospitalEmployee(personID, salary, supervisor, typeOfEmployee, start
 ('DE1234567890', 100000, null, 'DOCTOR', to_date('14-07-2018 00:00:00','dd-mm-yyyy hh24:mi:ss'), null, null);
 INSERT INTO HospitalEmployee(personID, salary, supervisor, typeOfEmployee, startEmployment, endEmployment, picture) VALUES 
 ('DE1234567893', 60500, 'DE1234567890', 'NURSE', to_date('01-06-2020 00:00:00','dd-mm-yyyy hh24:mi:ss'), null, null);
---******************************************************************************************
-INSERT INTO Patient(personID, bloodType) VALUES 
-('DE1234567890', 'B RH NEG');
-INSERT INTO Patient(personID, bloodType) VALUES 
-('DE1234567891', '0 RH POS');
-INSERT INTO Patient(personID, bloodType) VALUES 
-('DE1234567892', 'B RH POS');
-INSERT INTO Patient(personID, bloodType) VALUES 
-('DE1234567893', 'AB RH POS');
 --******************************************************************************************
 INSERT INTO AuthorizationRole(authorizationRoleID, name) VALUES
 (AuthorizationRoleSequence.nextVal, 'DOCTOR');
@@ -484,9 +475,13 @@ INSERT INTO Disease(diseaseID, name, description) VALUES
 (DiseaseSequence.nextVal, 'Radiusfraktur', 'Bruch der Speiche');
 --******************************************************************************************
 INSERT INTO Diagnostics(diagnosticsID, person, disease, doctor, diagnosticTimestamp) VALUES
-(DiagnosticsSequence.nextVal, 'DE1234567891', 1, 'DE1234567893',to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'));                                                                                                           
+(DiagnosticsSequence.nextVal, 'DE1234567891', 1, 'DE1234567893',to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'));
+INSERT INTO Diagnostics(diagnosticsID, person, disease, doctor, diagnosticTimestamp) VALUES
+(DiagnosticsSequence.nextVal, 'DE1234567892', 1, 'DE1234567893',to_date('17-06-2020 08:04:34','dd-mm-yyyy hh24:mi:ss'));    
 --******************************************************************************************
 INSERT INTO MedicalRecord(stay, diagnostics) VALUES
 (1, 1);
+INSERT INTO MedicalRecord(stay, diagnostics) VALUES
+(2, 1);
 --******************************************************************************************
 COMMIT;
