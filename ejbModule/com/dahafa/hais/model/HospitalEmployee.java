@@ -21,13 +21,10 @@ public class HospitalEmployee extends Person implements Serializable {
 	@Lob
 	private byte[] picture;
 
-	@ManyToOne
-	@JoinColumn(name="SUPERVISOR")
+
 	private HospitalEmployee supervisor;
 
-	@ManyToMany
-	@JoinTable(name="ROLEASSIGNMENT", joinColumns={@JoinColumn(name="EMPLOYEE")},
-			inverseJoinColumns={@JoinColumn(name="AUTHORIZATIONROLE")})
+
 	private List<AuthorizationRole> authorizationRoles;
 
 
@@ -37,6 +34,9 @@ public class HospitalEmployee extends Person implements Serializable {
 	private String typeOfEmployee;
 
 
+	@ManyToMany
+	@JoinTable(name="ROLEASSIGNMENT", joinColumns={@JoinColumn(name="EMPLOYEE")},
+			inverseJoinColumns={@JoinColumn(name="AUTHORIZATIONROLE")})
 	public List<AuthorizationRole> getAuthorizationRoles() {
 		return this.authorizationRoles;
 	}
@@ -87,6 +87,8 @@ public class HospitalEmployee extends Person implements Serializable {
 		this.startEmployment = startEmployment;
 	}
 
+	@ManyToOne
+	@JoinColumn(name="SUPERVISOR")
 	public HospitalEmployee getSupervisor() {
 		return this.supervisor;
 	}

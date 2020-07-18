@@ -58,6 +58,8 @@ CREATE TABLE Person (
     personTitle VARCHAR2(64),
     gender VARCHAR2(8) NOT NULL,
     -- fingerprint BLOB
+    bloodType VARCHAR2(16),
+    CONSTRAINT patient_bloodType CHECK (bloodType IN ('A RH POS', '0 RH POS', 'B RH POS', 'AB RH POS', 'AB RH NEG', 'B RH NEG', '0 RH NEG', 'A RH NEG') AND bloodType IS NOT NULL),
     CONSTRAINT person_gender CHECK (gender IN ('MALE', 'FEMALE', 'DIVERSE') AND gender IS NOT NULL)
 );
 
@@ -77,12 +79,6 @@ CREATE TABLE HospitalEmployee (
     endEmployment DATE,
     picture BLOB,
     CONSTRAINT hospitalemployee_typeofemployee CHECK (typeOfEmployee IN ('DOCTOR', 'NURSE') AND typeOfEmployee IS NOT NULL)
-);
-
-CREATE TABLE Patient (
-    personID VARCHAR2(64) PRIMARY KEY,
-    bloodType VARCHAR2(16),
-    CONSTRAINT patient_bloodType CHECK (bloodType IN ('A RH POS', '0 RH POS', 'B RH POS', 'AB RH POS', 'AB RH NEG', 'B RH NEG', '0 RH NEG', 'A RH NEG') AND bloodType IS NOT NULL)
 );
 
 CREATE TABLE AuthorizationRole (

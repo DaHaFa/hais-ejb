@@ -3,7 +3,9 @@ package com.dahafa.hais.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -21,15 +23,13 @@ import com.dahafa.hais.Identifiable;
 public class Person implements Serializable, Identifiable<String> {
 	private static final long serialVersionUID = 1L;
 
-	@Id
+
 	private String personID;
 
-	@ManyToOne
-	@JoinColumn(name="ADDRESS")
+
 	private Address address;
 
-	@OneToMany
-	@JoinColumn(name="PERSON")
+
 	private List<PersonHealthInsurance> personHealthInsurances;
 
 	private String firstname;
@@ -37,8 +37,11 @@ public class Person implements Serializable, Identifiable<String> {
 	private String personTitle;
 	private String gender;
 
+	private String bloodType;
 
 	@Override
+	@Id
+	@Column(name="personID")
 	public String getID() {
 		return this.personID;
 	}
@@ -55,12 +58,20 @@ public class Person implements Serializable, Identifiable<String> {
 		this.firstname = firstname;
 	}
 
-	public Gender getGender() {
-		return Gender.valueOf(this.gender);
+	public String getGender() {
+		return this.gender;
 	}
 
-	public void setGender(final Gender gender) {
-		this.gender = gender.name();
+	public void setGender(final String gender) {
+		this.gender = gender;
+	}
+
+	public String getBloodType() {
+		return this.bloodType;
+	}
+
+	public void setBloodType(final String bloodType) {
+		this.bloodType = bloodType;
 	}
 
 	public String getLastname() {
@@ -79,6 +90,8 @@ public class Person implements Serializable, Identifiable<String> {
 		this.personTitle = personTitle;
 	}
 
+	@ManyToOne
+	@JoinColumn(name="ADDRESS")
 	public Address getAddress() {
 		return this.address;
 	}
@@ -87,6 +100,9 @@ public class Person implements Serializable, Identifiable<String> {
 		this.address = address;
 	}
 
+
+	@OneToMany(fetch=FetchType.EAGER)
+	@JoinColumn(name="PERSON")
 	public List<PersonHealthInsurance> getPersonHealthInsurances() {
 		return this.personHealthInsurances;
 	}

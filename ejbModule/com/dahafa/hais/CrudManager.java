@@ -19,7 +19,7 @@ import javax.persistence.TypedQuery;
 public abstract class CrudManager<K, E extends Identifiable<K>> implements CrudService<K, E> {
 
 	@PersistenceContext(unitName = Constants.PERSISTENCE_UNIT)
-	private EntityManager manager;
+	protected EntityManager manager;
 
 
 	@SuppressWarnings("unchecked")

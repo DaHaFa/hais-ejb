@@ -1,9 +1,11 @@
-package com.dahafa.hais.model;
+	package com.dahafa.hais.model;
 
+import java.awt.geom.Path2D;
 import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +31,7 @@ public class Room implements Serializable, Identifiable<Long> {
 		sequenceName="RoomSequence", allocationSize=1)
 	private long roomID;
 
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	@JoinColumn(name="ROOM")
 	private List<GeoLocation> coordinates;
 
@@ -40,6 +42,25 @@ public class Room implements Serializable, Identifiable<Long> {
 
 	private String name;
 	private String roomType;
+
+
+	public boolean contains(final double latitude, final double longitude) {
+		if(this.coordinates.isEmpty())
+			return false;
+
+		final GeoLocation start = this.coordinates.get(0);
+
+		final Path2D polygon = new Path2D.Double();
+		polygon.moveTo(start.getLatitude(), start.getLongitude());
+
+		for(int i = 1; i < this.coordinates.size(); i++) {
+			final GeoLocation geoLocation = this.coordinates.get(i);
+			polygon.lineTo(geoLocation.getLatitude(), geoLocation.getLongitude());
+		}
+		polygon.closePath();
+
+		return polygon.contains(latitude, longitude);
+	}
 
 
 	@Override

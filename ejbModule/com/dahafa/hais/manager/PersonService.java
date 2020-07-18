@@ -3,10 +3,10 @@ package com.dahafa.hais.manager;
 import javax.ejb.Remote;
 
 import com.dahafa.hais.CrudService;
-import com.dahafa.hais.model.Patient;
+import com.dahafa.hais.model.Person;
 
 
 @Remote
-public interface PatientService extends CrudService<String, Patient> {
+public interface PersonService extends CrudService<String, Person> {
 
 }
